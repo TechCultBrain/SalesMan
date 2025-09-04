@@ -14,9 +14,15 @@ class VerifyOtpViewModel : ViewModel() {
 
     fun onAction(action: OtpAction) {
         when (action) {
-            is OtpAction.OnChangeFieldFocused -> TODO()
-            is OtpAction.OnEnterNumber -> TODO()
-            OtpAction.OnKeyboardBack -> TODO()
+            is OtpAction.OnChangeFieldFocused -> {
+
+            }
+            is OtpAction.OnEnterNumber -> {
+
+            }
+            OtpAction.OnKeyboardBack -> {
+
+            }
             OtpAction.VerifyOtp -> {
 
 

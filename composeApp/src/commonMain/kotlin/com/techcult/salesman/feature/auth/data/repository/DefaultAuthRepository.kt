@@ -29,10 +29,10 @@ class DefaultAuthRepository(val remoteAuthDataSource: RemoteAuthDataSource) : Au
         email: String,
         password: String
     ): Result<Unit, DataError> {
-        TODO("Not yet implemented")
+        return Result.Success(Unit)
     }
 
     override suspend fun logoutUser(): Result<Unit, Error> {
-        TODO("Not yet implemented")
+       return Result.Success(Unit)
     }
 }
