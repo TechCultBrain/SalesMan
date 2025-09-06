@@ -95,6 +95,9 @@ sealed interface Screen {
     @Serializable
     data object StaffManagement : Screen
 
+    @Serializable
+    data object RoleManagement : Screen
+
 
 
 }

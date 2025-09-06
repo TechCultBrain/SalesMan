@@ -1,4 +1,4 @@
-package com.techcult.salesman.feature.Settings.presentation.common.data.presentation
+package com.techcult.salesman.feature.Settings.common.data.presentation
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.channels.Channel

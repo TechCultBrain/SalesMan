@@ -1,4 +1,4 @@
-package com.techcult.salesman.feature.Settings.presentation.common.data.presentation
+package com.techcult.salesman.feature.Settings.common.data.presentation
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -29,22 +29,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.techcult.salesman.core.presentation.components.HeaderTextWithIcon
 import com.techcult.salesman.core.presentation.components.HeaderWithIcon
 import com.techcult.salesman.core.presentation.components.TextListItem
 import com.techcult.salesman.core.presentation.theme.LocalPadding
 import com.techcult.salesman.core.utils.DeviceConfiguration
-import com.techcult.salesman.feature.Settings.presentation.common.data.SettingsRouting
+import com.techcult.salesman.feature.Settings.common.data.SettingsRouting
 
 @Composable
 fun SettingsScreen(navigateTo: (Any) -> Unit) {
 
-    SettingsScreenContent(modifier = Modifier, onAction = {action->
-       when(action){
-           is SettingsAction.OnSettingOptionClicked->{
-               navigateTo(action.option.route)
-           }
+    SettingsScreenContent(modifier = Modifier, onAction = { action ->
+        when (action) {
+            is SettingsAction.OnSettingOptionClicked -> {
+                navigateTo(action.option.route)
+            }
 
-       }
+        }
     })
 
 }
@@ -54,7 +55,7 @@ fun SettingsScreen(navigateTo: (Any) -> Unit) {
 fun SettingsScreenContent(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
     val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
     val deviceConfiguration = DeviceConfiguration.fromWindowSizeClass(windowSizeClass)
-    val scrollState= rememberScrollState(initial = 2)
+    val scrollState = rememberScrollState(initial = 2)
     Scaffold {
         when (deviceConfiguration) {
             DeviceConfiguration.TABLET_LANDSCAPE -> {
@@ -76,24 +77,19 @@ fun SettingsScreenContent(modifier: Modifier, onAction: (SettingsAction) -> Unit
 
 
 @Composable
-fun SettingsWideScreen(onAction: (SettingsAction) -> Unit)
-{
-    Surface(modifier = Modifier.fillMaxSize().padding(all=16.dp),) {
+fun SettingsWideScreen(onAction: (SettingsAction) -> Unit) {
+    Surface(modifier = Modifier.fillMaxSize().padding(all = 16.dp)) {
         Column(
             Modifier.fillMaxSize()
 
         )
         {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
-                Icon(imageVector = Icons.Outlined.Settings, contentDescription = null)
-                Spacer(modifier = Modifier.width(LocalPadding.current.tiny))
-                Text("Settings", style = MaterialTheme.typography.titleLarge)
-            }
-            Spacer(modifier = Modifier.height(LocalPadding.current.micro))
-            Text(
-                "Configure your pos and Manage Store Settings",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+            HeaderTextWithIcon(
+                icon = Icons.Outlined.Settings,
+                title = "Settings",
+                subtitle = "Configure your pos and Manage Store Settings",
+                modifier = Modifier,
+                deviceConfiguration = DeviceConfiguration.DESKTOP
             )
             Spacer(modifier = Modifier.height(LocalPadding.current.large))
 
@@ -132,32 +128,21 @@ fun SettingsWideScreen(onAction: (SettingsAction) -> Unit)
 }
 
 @Composable
-fun SettingsCompactScreen(onAction: (SettingsAction) -> Unit)
-{
-    Surface(modifier = Modifier.fillMaxSize().padding(all=16.dp),) {
+fun SettingsCompactScreen(onAction: (SettingsAction) -> Unit) {
+    Surface(modifier = Modifier.fillMaxSize().padding(all = 16.dp)) {
         Column(
             Modifier.fillMaxSize().verticalScroll(rememberScrollState())
 
         )
         {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
-                Icon(imageVector = Icons.Outlined.Settings, contentDescription = null)
-                Spacer(modifier = Modifier.width(LocalPadding.current.tiny))
-                Text("Settings", style = MaterialTheme.typography.titleLarge)
-            }
-            Spacer(modifier = Modifier.height(LocalPadding.current.micro))
-            Text(
-                "Configure your pos and Manage Store Settings",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
+            HeaderTextWithIcon(
+                icon = Icons.Outlined.Settings,
+                title = "Settings",
+                subtitle = "Configure your pos and Manage Store Settings",
+                modifier = Modifier,
+                deviceConfiguration = DeviceConfiguration.MOBILE_PORTRAIT
             )
             Spacer(modifier = Modifier.height(LocalPadding.current.large))
-
-
-
-
-
-
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(LocalPadding.current.tiny)
@@ -203,6 +188,13 @@ fun StaffSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
             )
             TextListItem(
                 onClick = {
+                    onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.RoleManagement))
+                },
+                titleText = "Role & Permission Management",
+                subtitleText = "Configure user roles & Permissions"
+            )
+            TextListItem(
+                onClick = {
                     onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.StaffManagement))
                 },
                 titleText = "Staff Management",
@@ -244,25 +236,22 @@ fun ReceiptSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
                 titleText = "Tax Settings",
                 subtitleText = "Configure tax rates and calculations"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.extraLarge))
             TextListItem(
                 onClick = {},
                 titleText = "Receipt Template",
                 subtitleText = "Customize receipt layout and branding"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
             TextListItem(
                 onClick = {},
                 titleText = "Dashboard Settings",
                 subtitleText = "Customize your dashboard layout and widgets"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
             TextListItem(
                 onClick = {},
                 titleText = "Printer & Device Settings",
                 subtitleText = "Configure printer and hardware devices"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
+            Spacer(modifier = Modifier.height(LocalPadding.current.tiny))
 
 
         }
@@ -271,7 +260,7 @@ fun ReceiptSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
 }
 
 @Composable
-fun GeneralSettings(modifier: Modifier,onAction: (SettingsAction) -> Unit) {
+fun GeneralSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
     Surface(
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
@@ -294,7 +283,6 @@ fun GeneralSettings(modifier: Modifier,onAction: (SettingsAction) -> Unit) {
                 titleText = "Store Information",
                 subtitleText = "Business details and contact information"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
             TextListItem(
                 onClick = {
                     onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.DashboardSettings))
@@ -303,7 +291,6 @@ fun GeneralSettings(modifier: Modifier,onAction: (SettingsAction) -> Unit) {
                 titleText = "Dashboard Settings",
                 subtitleText = "Customize your dashboard layout and widgets"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
             TextListItem(
                 onClick = {
                     onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.LanguageSettings))
@@ -311,7 +298,6 @@ fun GeneralSettings(modifier: Modifier,onAction: (SettingsAction) -> Unit) {
                 titleText = "Language & Currency",
                 subtitleText = "Localizations and currency settings"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
             TextListItem(
                 onClick = {
                     onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.NotificationSettings))
@@ -326,7 +312,7 @@ fun GeneralSettings(modifier: Modifier,onAction: (SettingsAction) -> Unit) {
 }
 
 @Composable
-fun InventorySettings(modifier: Modifier,onAction: (SettingsAction) -> Unit) {
+fun InventorySettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
     Surface(
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
@@ -351,7 +337,6 @@ fun InventorySettings(modifier: Modifier,onAction: (SettingsAction) -> Unit) {
                 titleText = "Product Management",
                 subtitleText = "Manage product inventory and prices"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
             TextListItem(
                 onClick = {
                     onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.SupplierManagement))
@@ -359,7 +344,6 @@ fun InventorySettings(modifier: Modifier,onAction: (SettingsAction) -> Unit) {
                 titleText = "Suppliers",
                 subtitleText = "Manage supplier information and relationship"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
             TextListItem(
                 onClick = {
                     onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.CategoryScreen))
@@ -367,7 +351,6 @@ fun InventorySettings(modifier: Modifier,onAction: (SettingsAction) -> Unit) {
                 titleText = "Categories",
                 subtitleText = "Organize products into categories and subcategories"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
             TextListItem(
                 onClick = {
                     onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.StockManagement))

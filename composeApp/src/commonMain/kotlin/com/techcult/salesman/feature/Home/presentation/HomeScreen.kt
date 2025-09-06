@@ -13,27 +13,20 @@ import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.createGraph
-import com.techcult.salesman.app.Navigation.Screen
 import com.techcult.salesman.core.data.AdminNavItem
 import com.techcult.salesman.core.utils.DeviceConfiguration
-import com.techcult.salesman.feature.DashBoard.DashBoardScreen
 import com.techcult.salesman.feature.Home.navigation.HomeGraph
-import com.techcult.salesman.feature.Sales.presentation.SalesScreen
-import com.techcult.salesman.feature.Settings.presentation.common.data.presentation.SettingsScreen
-import com.techcult.salesman.feature.Settings.presentation.user.presentation.UserManagementScreen
-import com.techcult.salesman.feature.customer.data.CustomerScreen
-import com.techcult.salesman.feature.report.presentation.ReportScreen
+import io.ktor.client.request.invoke
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.time.Clock
@@ -88,7 +81,7 @@ fun HomeScreenContent(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-            })
+            }, colors = TopAppBarDefaults.topAppBarColors().copy(containerColor = Color(0xFF56f788)))
         }, floatingActionButton = {
 
         },
@@ -107,7 +100,7 @@ fun HomeScreenContent(
                     onAction = onAction,
                     modifier = Modifier.padding(top = padding.calculateTopPadding())
                 )
-                HomeGraph(navController,modifier = Modifier.padding(top = padding.calculateTopPadding(), start = 96.dp))
+                HomeGraph(navController,modifier = Modifier.padding(start = 96.dp))
 
             }
 

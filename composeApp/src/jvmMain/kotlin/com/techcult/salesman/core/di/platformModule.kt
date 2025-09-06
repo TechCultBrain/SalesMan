@@ -1,5 +1,6 @@
 package com.techcult.salesman.core.di
 
+import com.techcult.salesman.core.data.database.DatabaseFactory
 import com.techcult.salesman.core.data.prefernces.createDataStore
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.okhttp.OkHttp
@@ -13,6 +14,10 @@ actual val platformModule: Module =
 
         single {
             createDataStore(null)
+        }
+        single {
+            DatabaseFactory()
+
         }
 
 

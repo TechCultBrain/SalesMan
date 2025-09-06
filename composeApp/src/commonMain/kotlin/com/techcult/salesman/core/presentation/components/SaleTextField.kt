@@ -1,5 +1,8 @@
 package com.techcult.salesman.core.presentation.components
 
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -19,7 +22,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.unit.dp
 import com.techcult.salesman.core.presentation.theme.LocalDimensions
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
@@ -54,7 +59,7 @@ fun MyTextField(
 
     OutlinedTextField(
         readOnly =readOnly ,
-        modifier = modifier.widthIn(
+        modifier = modifier.height(64.dp).widthIn(
             min = LocalDimensions.current.minWidthForTextField,
             max = LocalDimensions.current.maxWidthForTextField
         ),
@@ -149,6 +154,8 @@ fun MyTextField(
                 errorContainerColor = MaterialTheme.colorScheme.onPrimary
             ),
         shape = MaterialTheme.shapes.medium,
+        textStyle = TextStyle.Default.copy(fontSize = MaterialTheme.typography.bodyLarge.fontSize),
+
 
 
     )

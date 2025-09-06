@@ -1,4 +1,4 @@
-package com.techcult.salesman.feature.Settings.presentation.common.data
+package com.techcult.salesman.feature.Settings.common.data
 
 import com.techcult.salesman.app.Navigation.Screen
 
@@ -17,6 +17,8 @@ enum class SettingsRouting(val route: Any) {
    StockManagement(Screen.StockManagement),
    UserManagement(Screen.UserManagement),
    StaffManagement(Screen.StaffManagement),
+
+   RoleManagement(Screen.RoleManagement),
 
 
 }
