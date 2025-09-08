@@ -9,6 +9,7 @@ import com.techcult.salesman.feature.Home.di.homeModule
 import com.techcult.salesman.feature.RolePermission.di.roleModule
 import com.techcult.salesman.feature.Settings.di.settingsModule
 import com.techcult.salesman.feature.auth.di.authModule
+import com.techcult.salesman.feature.user.di.userModule
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -19,7 +20,7 @@ expect val platformModule: Module
 
 val coreModule = module {
 
-    includes(authModule, platformModule, homeModule,settingsModule, roleModule)
+    includes(authModule, platformModule, homeModule,settingsModule, roleModule, userModule)
     single { HttpClientFactory.create(get()) }
     single {
         get<DatabaseFactory>().create()

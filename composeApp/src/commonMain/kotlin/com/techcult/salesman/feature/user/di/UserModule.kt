@@ -1,4 +1,4 @@
-package com.techcult.salesman.feature.Settings.di
+package com.techcult.salesman.feature.user.di
 
 import com.techcult.salesman.feature.user.data.UserRepositoryImpl
 import com.techcult.salesman.feature.user.domain.GetUserListUseCase
@@ -9,6 +9,15 @@ import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val settingsModule = module {
+val userModule= module {
+    singleOf(::UserRepositoryImpl).bind<UserRepository>()
+
+    viewModel { UserViewModel(get(), get()) }
+    single {
+        GetUserListUseCase(get())
+    }
+    viewModel {
+        UserViewModel(get(),get())
+    }
 
 }

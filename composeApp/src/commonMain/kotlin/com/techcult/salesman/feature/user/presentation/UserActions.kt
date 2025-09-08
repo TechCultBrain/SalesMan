@@ -3,8 +3,7 @@ package com.techcult.salesman.feature.user.presentation
 
 sealed interface UserActions {
 
-    data class OnAddUserClick(val isAddDialogOpen: Boolean) : UserActions
-    data class OnCloseAddDialog(val isAddDialogOpen: Boolean) : UserActions
+    data class OnAddUserClick(val isUserAddDialogOpen: Boolean) : UserActions
     data class OnSearchTextChange(val searchText: String) : UserActions
     data class OnDeleteUserClick(val userId: Int) : UserActions
     data class OnEditUserClick(val userId: Int) : UserActions
@@ -18,6 +17,9 @@ sealed interface UserActions {
     data class OnUserImageChange(val userImage: String) : UserActions
     data object OnSaveUserClick : UserActions
     data object OnCancelUserClick : UserActions
-    data class OnUserRoleClick(val userRole: String) : UserActions
+    data class OnUserRoleClick(val roleId: Long, val roleName: String) : UserActions
+    data class OnRoleDropClick(val isRoleDropOpen: Boolean) : UserActions
+
+    data class OnQueryChange(val query: String) : UserActions
 
 }

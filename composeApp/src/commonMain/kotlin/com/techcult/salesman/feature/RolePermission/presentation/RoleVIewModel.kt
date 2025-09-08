@@ -189,6 +189,13 @@ class RoleViewModel(private val rolePermissionRepository: RolePermissionReposito
                 }
 
             }
+
+            is RolePermissionAction.OnSelectedTabChanged -> {
+                _state.update {
+                    it.copy(selectedTab = action.selectedTab)
+                }
+
+            }
         }
 
     }

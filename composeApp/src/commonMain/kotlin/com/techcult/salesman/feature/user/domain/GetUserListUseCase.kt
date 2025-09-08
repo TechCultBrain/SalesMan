@@ -6,9 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 class GetUserListUseCase(val userRepository: UserRepository) {
 
-    suspend fun invoke(): Result<Flow<List<User>>, Error> {
-        return userRepository.getUserList()
 
-    }
 }
 

@@ -15,7 +15,7 @@ data class UserEntity @OptIn(ExperimentalTime::class) constructor(
     val profilePicture: String? = null,
     val phoneNumber: String? = null,
     val address: String? = null,
-    val role: String? = null,
+    val role: Long? = null,
     val createdAt: Long = Clock.System.now().epochSeconds,
     val updatedAt: Long =Clock.System.now().epochSeconds,
     val isAvailable: Boolean = true

@@ -20,7 +20,7 @@ fun HomeGraph(navController: NavHostController,modifier: Modifier) {
     NavHost(navController = navController, startDestination = Screen.DashboardRoute, modifier = modifier) {
 
         composable<Screen.DashboardRoute> {
-            DashBoardScreen()
+            UserManagementScreen()
         }
 
         composable<Screen.SaleRoute> {
@@ -44,69 +44,67 @@ fun HomeGraph(navController: NavHostController,modifier: Modifier) {
         }
         composable<Screen.UserManagement>
         {
-            UserManagementScreen(onBackClicked = {
-                navController.navigate(Screen.SettingsRoute)
-            })
+            UserManagementScreen()
         }
         composable<Screen.StoreInformation>
         {
-            UserManagementScreen()
+           // UserManagementScreen()
         }
         composable<Screen.LanguageSettings>
         {
-            UserManagementScreen()
+           // UserManagementScreen()
         }
         composable<Screen.NotificationSettings>
         {
-            UserManagementScreen()
+            //UserManagementScreen()
         }
         composable<Screen.TaxSettings>
         {
-            UserManagementScreen()
+            //UserManagementScreen()
         }
         composable<Screen.ReceiptSettings>
         {
-            UserManagementScreen()
+            //UserManagementScreen()
         }
         composable<Screen.PrinterSettings>
         {
-            UserManagementScreen()
+            //UserManagementScreen()
         }
         composable<Screen.ProductManagement>
         {
-            UserManagementScreen()
+           // UserManagementScreen()
         }
         composable<Screen.SupplierManagement>
         {
-            UserManagementScreen()
+            //UserManagementScreen()
         }
         composable<Screen.CategoryScreen>
         {
-            UserManagementScreen()
+           // UserManagementScreen()
         }
         composable<Screen.StockManagement>
         {
-            UserManagementScreen()
+           // UserManagementScreen()
         }
         composable<Screen.StaffManagement>
         {
-            UserManagementScreen()
+           // UserManagementScreen()
         }
         composable<Screen.DashboardSettings>
         {
-            UserManagementScreen()
+          //  UserManagementScreen()
         }
         composable<Screen.StoreInformation>
         {
-            UserManagementScreen()
+            //UserManagementScreen()
         }
         composable<Screen.LanguageSettings>
         {
-            UserManagementScreen()
+            //UserManagementScreen()
         }
         composable<Screen.NotificationSettings>
         {
-            UserManagementScreen()
+            //UserManagementScreen()
         }
         composable<Screen.RoleManagement> {
             RolePermissionScreen()

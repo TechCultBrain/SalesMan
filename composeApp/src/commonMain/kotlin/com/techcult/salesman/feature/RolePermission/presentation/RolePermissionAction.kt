@@ -2,6 +2,8 @@ package com.techcult.salesman.feature.RolePermission.presentation
 
 sealed interface RolePermissionAction {
 
+    data class OnSelectedTabChanged(val selectedTab: Int) : RolePermissionAction
+
     data class OnAddRoleClicked(val isRoleAddDialogVisible: Boolean) : RolePermissionAction
     data class OnRoleNameChanged(val roleName: String) : RolePermissionAction
     data class OnRoleDescriptionChanged(val roleDescription: String) : RolePermissionAction

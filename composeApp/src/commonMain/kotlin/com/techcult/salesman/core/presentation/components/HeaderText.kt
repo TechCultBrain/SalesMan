@@ -26,17 +26,17 @@ import com.techcult.salesman.core.utils.DeviceConfiguration
 @Composable
 fun HeaderTextWithIcon(
     icon: ImageVector? = null,
-    title: String="Settings",
+    title: String = "Settings",
     subtitle: String? = null,
     modifier: Modifier = Modifier,
-    deviceConfiguration: DeviceConfiguration=DeviceConfiguration.TABLET_LANDSCAPE,
+    deviceConfiguration: DeviceConfiguration = DeviceConfiguration.TABLET_LANDSCAPE,
     buttonIcon: ImageVector = Icons.Outlined.Add,
     buttonText: String = "Add",
     onButtonClicked: () -> Unit = {},
     onBackClicked: () -> Unit = {}
 ) {
     if (deviceConfiguration == DeviceConfiguration.MOBILE_PORTRAIT) {
-        Row (
+        Row(
             modifier = Modifier.fillMaxWidth()
                 .height(LocalDimensions.current.viewSmall),
             verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
@@ -55,7 +55,7 @@ fun HeaderTextWithIcon(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
         ) {
-            Row(modifier= Modifier.weight(1f)) {
+            Row(modifier = Modifier.weight(1f)) {
 
 
                 Column(modifier = modifier) {
@@ -74,7 +74,7 @@ fun HeaderTextWithIcon(
                         Text(
                             subtitle,
                             style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
                         )
                     }
                 }

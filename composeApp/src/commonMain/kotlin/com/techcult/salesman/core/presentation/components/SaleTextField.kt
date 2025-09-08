@@ -59,7 +59,7 @@ fun MyTextField(
 
     OutlinedTextField(
         readOnly =readOnly ,
-        modifier = modifier.height(64.dp).widthIn(
+        modifier = modifier.widthIn(
             min = LocalDimensions.current.minWidthForTextField,
             max = LocalDimensions.current.maxWidthForTextField
         ),
@@ -154,7 +154,6 @@ fun MyTextField(
                 errorContainerColor = MaterialTheme.colorScheme.onPrimary
             ),
         shape = MaterialTheme.shapes.medium,
-        textStyle = TextStyle.Default.copy(fontSize = MaterialTheme.typography.bodyLarge.fontSize),
 
 
 
