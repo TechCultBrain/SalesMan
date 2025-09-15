@@ -2,6 +2,7 @@ package com.techcult.salesman.core.presentation.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.CircularProgressIndicator
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.techcult.salesman.core.presentation.theme.LocalDimensions
 
 @Composable
 fun MyButton(
@@ -24,7 +26,10 @@ fun MyButton(
 
     Button(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.widthIn(
+            min = LocalDimensions.current.minWidthForTextField,
+            max = LocalDimensions.current.maxWidthForTextField
+        ),
         enabled = isEnabled,
         colors = buttonColors,
         shape = MaterialTheme.shapes.medium

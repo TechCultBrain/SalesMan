@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ChevronLeft
+import androidx.compose.material.icons.outlined.Save
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -33,7 +35,8 @@ fun HeaderTextWithIcon(
     buttonIcon: ImageVector = Icons.Outlined.Add,
     buttonText: String = "Add",
     onButtonClicked: () -> Unit = {},
-    onBackClicked: () -> Unit = {}
+    onBackClicked: () -> Unit = {},
+    isAddButton: Boolean = false
 ) {
     if (deviceConfiguration == DeviceConfiguration.MOBILE_PORTRAIT) {
         Row(
@@ -41,10 +44,18 @@ fun HeaderTextWithIcon(
                 .height(LocalDimensions.current.viewSmall),
             verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
         ) {
+            Row(modifier = Modifier.weight(1f),verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
 
-            icon?.let { Icon(imageVector = it, contentDescription = null) }
-            Spacer(modifier = Modifier.width(LocalPadding.current.micro))
-            Text(title, style = MaterialTheme.typography.titleMedium)
+                icon?.let { Icon(imageVector = it, contentDescription = null) }
+                Spacer(modifier = Modifier.width(LocalPadding.current.micro))
+                Text(title, style = MaterialTheme.typography.titleMedium)
+            }
+
+            Button(
+                onClick = onButtonClicked, shape = MaterialTheme.shapes.medium,
+            ){
+                   Text(buttonText)
+            }
         }
 
 
@@ -79,7 +90,9 @@ fun HeaderTextWithIcon(
                     }
                 }
             }
-            ButtonWithIcon(icon = buttonIcon, text = buttonText, onClick = onButtonClicked)
+            if (isAddButton) {
+                ButtonWithIcon(icon = buttonIcon, text = buttonText, onClick = onButtonClicked)
+            }
 
         }
     }

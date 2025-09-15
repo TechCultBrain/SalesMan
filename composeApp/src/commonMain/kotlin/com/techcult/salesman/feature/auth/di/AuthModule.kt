@@ -8,6 +8,7 @@ import com.techcult.salesman.feature.auth.data.repository.DefaultAuthRepository
 import com.techcult.salesman.feature.auth.domain.repository.AuthRepository
 import com.techcult.salesman.feature.auth.domain.usecase.LoginUseCase
 import com.techcult.salesman.feature.auth.domain.usecase.ResetPasswordUseCase
+import com.techcult.salesman.feature.auth.presentation.UserLogin.UserLoginViewModel
 import com.techcult.salesman.feature.auth.presentation.forgotpassword.ForgotPasswordViewModel
 import com.techcult.salesman.feature.auth.presentation.login.LoginViewModel
 import com.techcult.salesman.feature.auth.presentation.register.RegisterViewModel
@@ -36,6 +37,9 @@ val authModule = module {
     }
     single{
         PreferenceManger(get())
+    }
+    viewModel {
+        UserLoginViewModel(get())
     }
 
 

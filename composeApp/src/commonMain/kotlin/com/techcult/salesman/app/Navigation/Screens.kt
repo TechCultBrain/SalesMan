@@ -24,6 +24,9 @@ sealed interface Screen {
     data object VerifyOtpRoute : Screen
 
     @Serializable
+    data object UserLoginRoute : Screen
+
+    @Serializable
     data object HomeRoute : Screen
 
     @Serializable
@@ -98,6 +101,9 @@ sealed interface Screen {
     @Serializable
     data object RoleManagement : Screen
 
+
+    @Serializable
+    data object UomScreen : Screen
 
 
 }

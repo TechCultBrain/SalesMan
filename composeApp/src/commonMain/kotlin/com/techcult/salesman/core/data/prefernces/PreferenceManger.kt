@@ -13,6 +13,7 @@ class PreferenceManger(val preferences: DataStore<Preferences>) {
     companion object {
 
         val ACCESS_TOKEN = stringPreferencesKey("access_token")
+        val LOGGED_ID = stringPreferencesKey("logged_id")
     }
 
 
@@ -27,4 +28,15 @@ class PreferenceManger(val preferences: DataStore<Preferences>) {
             preferences[ACCESS_TOKEN] = accessToken
         }
     }
+    suspend fun getLoggedId(): Flow<String?> {
+        return preferences.data.map { preferences ->
+            preferences[LOGGED_ID]
+        }
+    }
+    suspend fun saveLoggedId(loggedId: String) {
+        preferences.edit { preferences ->
+            preferences[LOGGED_ID] = loggedId
+        }
+    }
+
 }

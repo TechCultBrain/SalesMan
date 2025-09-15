@@ -7,20 +7,26 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.techcult.salesman.app.Navigation.Screen
 import com.techcult.salesman.feature.DashBoard.DashBoardScreen
-import com.techcult.salesman.feature.RolePermission.presentation.RolePermissionScreen
+import com.techcult.salesman.feature.Settings.RolePermission.presentation.RolePermissionScreen
 import com.techcult.salesman.feature.Sales.presentation.SalesScreen
 import com.techcult.salesman.feature.Settings.common.data.presentation.SettingsScreen
+import com.techcult.salesman.feature.Settings.store.presentation.StoreInformationScreen
 import com.techcult.salesman.feature.user.presentation.UserManagementScreen
 import com.techcult.salesman.feature.customer.data.CustomerScreen
+import com.techcult.salesman.feature.uom.presentation.UomScreen
 import com.techcult.salesman.feature.report.presentation.ReportScreen
 
 
 @Composable
-fun HomeGraph(navController: NavHostController,modifier: Modifier) {
-    NavHost(navController = navController, startDestination = Screen.DashboardRoute, modifier = modifier) {
+fun HomeGraph(navController: NavHostController, modifier: Modifier) {
+    NavHost(
+        navController = navController,
+        startDestination = Screen.DashboardRoute,
+        modifier = modifier
+    ) {
 
         composable<Screen.DashboardRoute> {
-            UserManagementScreen()
+            DashBoardScreen()
         }
 
         composable<Screen.SaleRoute> {
@@ -48,11 +54,11 @@ fun HomeGraph(navController: NavHostController,modifier: Modifier) {
         }
         composable<Screen.StoreInformation>
         {
-           // UserManagementScreen()
+            StoreInformationScreen()
         }
         composable<Screen.LanguageSettings>
         {
-           // UserManagementScreen()
+            // UserManagementScreen()
         }
         composable<Screen.NotificationSettings>
         {
@@ -72,7 +78,7 @@ fun HomeGraph(navController: NavHostController,modifier: Modifier) {
         }
         composable<Screen.ProductManagement>
         {
-           // UserManagementScreen()
+            // UserManagementScreen()
         }
         composable<Screen.SupplierManagement>
         {
@@ -80,24 +86,21 @@ fun HomeGraph(navController: NavHostController,modifier: Modifier) {
         }
         composable<Screen.CategoryScreen>
         {
-           // UserManagementScreen()
+            // UserManagementScreen()
         }
         composable<Screen.StockManagement>
         {
-           // UserManagementScreen()
+            // UserManagementScreen()
         }
         composable<Screen.StaffManagement>
         {
-           // UserManagementScreen()
+            // UserManagementScreen()
         }
         composable<Screen.DashboardSettings>
         {
-          //  UserManagementScreen()
+            //  UserManagementScreen()
         }
-        composable<Screen.StoreInformation>
-        {
-            //UserManagementScreen()
-        }
+
         composable<Screen.LanguageSettings>
         {
             //UserManagementScreen()
@@ -108,6 +111,10 @@ fun HomeGraph(navController: NavHostController,modifier: Modifier) {
         }
         composable<Screen.RoleManagement> {
             RolePermissionScreen()
+        }
+
+        composable<Screen.UomScreen> {
+            UomScreen()
         }
 
     }

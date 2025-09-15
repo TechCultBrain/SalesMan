@@ -25,9 +25,18 @@ fun App() {
 
         val viewModel = koinInject<MainViewModel>()
         val state by viewModel.state.collectAsStateWithLifecycle()
-        val startDestination = if (state.isLoggedIn) Screen.HomeRoute else Screen.LoginRoute
+        val startDestination =
+            if (state.isLoggedIn && state.isUserLoggedIn) {
+                Screen.HomeRoute
+            } else if (state.isLoggedIn && !state.isUserLoggedIn) {
+                Screen.UserLoginRoute
+            } else if (state.isLoggedIn.not()) {
+                Screen.LoginRoute
+            } else {
+                Screen.LoginRoute
+            }
 
-            SetupNavigation(startDestination)
+        SetupNavigation(startDestination)
 
 
     }

@@ -2,8 +2,6 @@ package com.techcult.salesman.core.data.database
 
 import androidx.room.Dao
 import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Upsert
@@ -31,7 +29,11 @@ interface UserDao {
     @Query("SELECT A.id,A.userName,A.phoneNumber,A.createdAt,B.roleName FROM UserEntity as A Inner Join RoleEntity as B on A.role = B.roleId " +
             " WHERE A.userName LIKE '%' || :query || '%'\n" +
             "        ORDER BY A.userName ASC" )
-     fun getUserByUserName(query: String): Flow<List<UserWithRole>>
+     fun getUserFlowByName(query: String): Flow<List<UserWithRole>>
+
+
+     @Query("Select * from UserEntity where userName=:userName")
+     suspend fun getUserByName(userName: String): UserEntity?
 
 
 }

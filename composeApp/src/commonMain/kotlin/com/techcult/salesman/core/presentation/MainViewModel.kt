@@ -10,18 +10,25 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(val preferenceManger: PreferenceManger) : ViewModel() {
 
-    private val _state = MutableStateFlow(LoginStatus(false, true))
+    private val _state = MutableStateFlow(LoginStatus(isLoggedIn = false, isLoading = true))
     val state = _state.asStateFlow()
 
     init {
         viewModelScope.launch {
-            preferenceManger.getAccessToken().collect { token->
+            preferenceManger.getAccessToken().collect { token ->
 
                 _state.update {
-                    it.copy(isLoggedIn = !token.isNullOrEmpty(),isLoading = false)
+                    it.copy(isLoggedIn = !token.isNullOrEmpty(), isLoading = false)
+                }
+            }}
+        viewModelScope.launch {
+            preferenceManger.getLoggedId().collect { id ->
+                _state.update {
+                    it.copy(isUserLoggedIn = !id.isNullOrEmpty(), isLoading = false)
                 }
             }
         }
+
     }
 
 
@@ -33,4 +40,8 @@ class MainViewModel(val preferenceManger: PreferenceManger) : ViewModel() {
     }
 }
 
-data class LoginStatus(val isLoggedIn: Boolean, val isLoading: Boolean)
+data class LoginStatus(
+    val isLoggedIn: Boolean,
+    val isLoading: Boolean,
+    val isUserLoggedIn: Boolean = false
+)

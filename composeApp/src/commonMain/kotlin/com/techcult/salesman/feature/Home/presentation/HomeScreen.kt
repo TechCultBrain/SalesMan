@@ -2,7 +2,10 @@ package com.techcult.salesman.feature.Home.presentation
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Error
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -21,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.techcult.salesman.core.data.AdminNavItem
@@ -47,7 +51,9 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
 
         viewModel.onAction(action)
 
-    }, navController)
+    }, navController, logout = {
+        viewModel.logout()
+    })
 
 
 }
@@ -58,7 +64,8 @@ fun HomeScreen(viewModel: HomeViewModel = koinViewModel()) {
 fun HomeScreenContent(
     state: HomeUiState,
     onAction: (HomeAction) -> Unit,
-    navController: NavHostController
+    navController: NavHostController,
+    logout: () -> Unit = {}
 ) {
 
 
@@ -66,23 +73,31 @@ fun HomeScreenContent(
     val deviceConfiguration = DeviceConfiguration.fromWindowSizeClass(windowSizeClass)
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Row {
-                    Text(
-                        "Welcome",
-                        style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier.weight(1f)
+            TopAppBar(
+                title = {
+                    Row {
+                        Text(
+                            "Welcome",
+                            style = MaterialTheme.typography.titleLarge,
+                            modifier = Modifier.weight(1f)
 
-                    )
-                    Text(
-                        "${Clock.System.now().nanosecondsOfSecond}",
-                        modifier = Modifier.weight(1f),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }, colors = TopAppBarDefaults.topAppBarColors().copy(containerColor = Color(0xFF56f788)))
+                        )
+                        Text(
+                            "${Clock.System.now().nanosecondsOfSecond}",
+                            modifier = Modifier.weight(1f),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors()
+                    .copy(containerColor = Color(0xFF56f788))
+            )
         }, floatingActionButton = {
+            FloatingActionButton(onClick = { logout() }) {
+                Icon(imageVector = Icons.Outlined.Error, contentDescription = null)
+            }
+
 
         },
         bottomBar = {
@@ -100,7 +115,7 @@ fun HomeScreenContent(
                     onAction = onAction,
                     modifier = Modifier.padding(top = padding.calculateTopPadding())
                 )
-                HomeGraph(navController,modifier = Modifier.padding(start = 96.dp))
+                HomeGraph(navController, modifier = Modifier.padding(start = 96.dp))
 
             }
 
@@ -110,13 +125,19 @@ fun HomeScreenContent(
                     onAction = onAction,
                     modifier = Modifier.padding(top = padding.calculateTopPadding())
                 )
-                HomeGraph(navController,modifier = Modifier.padding(top = padding.calculateTopPadding(), start = 96.dp))
+                HomeGraph(
+                    navController,
+                    modifier = Modifier.padding(top = padding.calculateTopPadding(), start = 96.dp)
+                )
 
             }
 
             else -> {
 
-                HomeGraph(navController,modifier = Modifier.padding(top = padding.calculateTopPadding()))
+                HomeGraph(
+                    navController,
+                    modifier = Modifier.padding(top = padding.calculateTopPadding())
+                )
 
             }
         }

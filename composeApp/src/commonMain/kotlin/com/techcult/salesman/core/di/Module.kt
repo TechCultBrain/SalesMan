@@ -6,9 +6,11 @@ import com.techcult.salesman.core.data.database.DatabaseFactory
 import com.techcult.salesman.core.data.networking.HttpClientFactory
 import com.techcult.salesman.core.presentation.MainViewModel
 import com.techcult.salesman.feature.Home.di.homeModule
-import com.techcult.salesman.feature.RolePermission.di.roleModule
+import com.techcult.salesman.feature.Settings.RolePermission.di.roleModule
 import com.techcult.salesman.feature.Settings.di.settingsModule
 import com.techcult.salesman.feature.auth.di.authModule
+import com.techcult.salesman.feature.product.di.productModule
+import com.techcult.salesman.feature.uom.di.uomModule
 import com.techcult.salesman.feature.user.di.userModule
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
@@ -20,7 +22,15 @@ expect val platformModule: Module
 
 val coreModule = module {
 
-    includes(authModule, platformModule, homeModule,settingsModule, roleModule, userModule)
+    includes(
+        authModule,
+        platformModule,
+        homeModule,
+        settingsModule,
+        userModule,
+        productModule,
+        uomModule,
+    )
     single { HttpClientFactory.create(get()) }
     single {
         get<DatabaseFactory>().create()

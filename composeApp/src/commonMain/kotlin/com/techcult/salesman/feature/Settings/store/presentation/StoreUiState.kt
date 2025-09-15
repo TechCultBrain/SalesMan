@@ -1,0 +1,40 @@
+package com.techcult.salesman.feature.Settings.store.presentation
+
+import com.techcult.salesman.core.data.BusinessType
+
+data class StoreUiState(
+    val storeId: Int = 0,
+    val isLoading: Boolean = false,
+    val businessName: String = "",
+    val businessType: String = "",
+    val businessLocation: String = "",
+    val businessAddress: String = "",
+    val businessCity: String = "",
+    val businessState: String = "",
+    val businessZipCode: String = "",
+    val businessEmail: String = "",
+    val businessPhone: String = "",
+    val businessAlternatePhone: String = "",
+    val businessLogo: String? = null,
+    val gstNumber: String = "",
+    val panNumber: String = "",
+    val tinNumber: String = "",
+    val fssaiNumber: String = "",
+    val businessTypeList: List<BusinessType> = BusinessType.entries.toList(),
+    val isBusinessTypeExpanded: Boolean = false,
+    val businessNameError: String? = null,
+    val businessLocationError: String? = null,
+    val businessAddressError: String? = null,
+    val businessCityError: String? = null,
+    val businessStateError: String? = null,
+    val businessZipCodeError: String? = null,
+    val businessEmailError: String? = null,
+    val businessPhoneError: String? = null,
+    val businessAlternatePhoneError: String? = null,
+    val gstNumberError: String? = null,
+    val panNumberError: String? = null,
+    val tinNumberError: String? = null,
+    val fssaiNumberError: String? = null,
+    val isEditMode: Boolean = false,
+
+    )

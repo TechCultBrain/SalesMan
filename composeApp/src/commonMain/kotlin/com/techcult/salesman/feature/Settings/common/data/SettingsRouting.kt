@@ -19,6 +19,7 @@ enum class SettingsRouting(val route: Any) {
    StaffManagement(Screen.StaffManagement),
 
    RoleManagement(Screen.RoleManagement),
+   UomManagement(Screen.UomScreen),
 
 
 }

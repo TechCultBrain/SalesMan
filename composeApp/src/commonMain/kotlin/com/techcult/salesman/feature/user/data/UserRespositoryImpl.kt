@@ -5,7 +5,6 @@ import com.techcult.salesman.core.data.database.UserEntity
 import com.techcult.salesman.core.data.database.UserWithRole
 import com.techcult.salesman.core.domain.Error
 import com.techcult.salesman.core.domain.Result
-import com.techcult.salesman.feature.user.domain.User
 import com.techcult.salesman.feature.user.domain.UserRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -30,6 +29,6 @@ class UserRepositoryImpl(val userDao: UserDao): UserRepository {
     }
 
     override suspend fun getUserByUserName(query: String): Result<Flow<List<UserWithRole>>, Error> {
-        return Result.Success(userDao.getUserByUserName(query))
+        return Result.Success(userDao.getUserFlowByName(query))
     }
 }

@@ -13,4 +13,7 @@ interface AuthRepository {
     suspend fun registerUser(email: String, password: String): Result<Unit, DataError>
 
     suspend fun logoutUser(): Result<Unit, Error>
+
+    suspend fun userLogin(userName: String, password: String): Result<Unit, DataError>
+
 }

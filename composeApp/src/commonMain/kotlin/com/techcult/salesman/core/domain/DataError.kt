@@ -25,5 +25,10 @@ sealed interface DataError : Error {
         INVALID_PHONE_NUMBER,
         INVALID_ADDRESS,
         INVALID_CITY,
+        INVALID_STATE,
+        INVALID_ZIP_CODE,
+        INVALID_COUNTRY,
+        USER_ALREADY_EXISTS,
+        USER_NOT_FOUND,
     }
 }

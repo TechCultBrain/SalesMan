@@ -1,5 +1,7 @@
 package com.techcult.salesman.core.presentation.components
 
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
@@ -11,8 +13,10 @@ import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -30,7 +34,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 
 @Composable
-fun MyTextField(
+fun MyOutlinedTextField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
@@ -58,13 +62,15 @@ fun MyTextField(
     }
 
     OutlinedTextField(
-        readOnly =readOnly ,
+        readOnly = readOnly,
         modifier = modifier.widthIn(
             min = LocalDimensions.current.minWidthForTextField,
             max = LocalDimensions.current.maxWidthForTextField
         ),
         value = value,
-        onValueChange = onValueChange,
+        onValueChange = { it ->
+            onValueChange(it)
+        },
         label = if (label != null) {
             { Text(text = label) }
         } else {
@@ -93,7 +99,10 @@ fun MyTextField(
                                 contentDescription = null
                             )
                         } else {
-                            Icon(imageVector = Icons.Outlined.VisibilityOff, contentDescription = null)
+                            Icon(
+                                imageVector = Icons.Outlined.VisibilityOff,
+                                contentDescription = null
+                            )
                         }
                     }
                 } else {
@@ -130,7 +139,7 @@ fun MyTextField(
         visualTransformation = if (isPassword) {
             if (isPasswordVisible) {
                 androidx.compose.ui.text.input.VisualTransformation.None
-            }else{
+            } else {
 
                 androidx.compose.ui.text.input.PasswordVisualTransformation()
             }
@@ -147,17 +156,22 @@ fun MyTextField(
             keyboardOptions
         },
         colors = TextFieldDefaults.colors()
-            .copy(focusedIndicatorColor = MaterialTheme.colorScheme.primaryContainer,
+            .copy(
+                focusedIndicatorColor = MaterialTheme.colorScheme.primaryContainer,
                 unfocusedIndicatorColor = MaterialTheme.colorScheme.surfaceVariant,
                 unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary,
                 focusedContainerColor = MaterialTheme.colorScheme.onPrimary,
                 errorContainerColor = MaterialTheme.colorScheme.onPrimary
             ),
         shape = MaterialTheme.shapes.medium,
+        textStyle = LocalTextStyle.current.copy(
+            color = MaterialTheme.colorScheme.onSurface,
+            fontSize = MaterialTheme.typography.bodyMedium.fontSize
+        )
 
 
 
-    )
+        )
 
 }
 

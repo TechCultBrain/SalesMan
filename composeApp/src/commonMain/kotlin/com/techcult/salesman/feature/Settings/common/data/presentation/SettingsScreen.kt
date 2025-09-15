@@ -99,15 +99,15 @@ fun SettingsWideScreen(onAction: (SettingsAction) -> Unit) {
                 horizontalArrangement = Arrangement.spacedBy(LocalPadding.current.tiny)
             ) {
                 Column(
-                    modifier = Modifier.fillMaxHeight().weight(1f),
+                    modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(LocalPadding.current.tiny)
                 ) {
 
 
-                    GeneralSettings(modifier = Modifier.weight(1f), onAction = onAction)
+                    GeneralSettings(modifier = Modifier, onAction = onAction)
 
 
-                    ReceiptSettings(modifier = Modifier.weight(1f), onAction = onAction)
+                    ReceiptSettings(modifier = Modifier, onAction = onAction)
 
 
                 }
@@ -117,10 +117,10 @@ fun SettingsWideScreen(onAction: (SettingsAction) -> Unit) {
                     verticalArrangement = Arrangement.spacedBy(LocalPadding.current.tiny)
                 ) {
 
-                    StaffSettings(modifier = Modifier.weight(1f), onAction = onAction)
+                    StaffSettings(modifier = Modifier, onAction = onAction)
 
 
-                    InventorySettings(modifier = Modifier.weight(1f), onAction)
+                    InventorySettings(modifier = Modifier, onAction)
                 }
             }
         }
@@ -178,7 +178,7 @@ fun StaffSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
                 titleText = "User & Staff Management",
                 subtitleText = "Manage users and staff members"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.extraLarge))
+            Spacer(modifier = Modifier.height(LocalPadding.current.normal))
             TextListItem(
                 onClick = {
                     onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.UserManagement))
@@ -226,7 +226,7 @@ fun ReceiptSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
                 titleText = "Tax & Printing",
                 subtitleText = "Receipt template and printer configuration"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.extraLarge))
+            Spacer(modifier = Modifier.height(LocalPadding.current.normal))
 
             TextListItem(
                 onClick = {
@@ -277,9 +277,11 @@ fun GeneralSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
                 titleText = "General Settings",
                 subtitleText = "Basic Store and System Configuration"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.extraLarge))
+            Spacer(modifier = Modifier.height(LocalPadding.current.normal))
             TextListItem(
-                onClick = {},
+                onClick = {
+                    onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.StoreInformation))
+                },
                 titleText = "Store Information",
                 subtitleText = "Business details and contact information"
             )
@@ -329,7 +331,7 @@ fun InventorySettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
                 titleText = "Inventory Management",
                 subtitleText = "Product and stock management Settings"
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.extraLarge))
+            Spacer(modifier = Modifier.height(LocalPadding.current.normal))
             TextListItem(
                 onClick = {
                     onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.ProductManagement))
@@ -350,6 +352,13 @@ fun InventorySettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
                 },
                 titleText = "Categories",
                 subtitleText = "Organize products into categories and subcategories"
+            )
+            TextListItem(
+                onClick = {
+                    onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.UomManagement))
+                },
+                titleText = "Uom",
+                subtitleText = "Manage Product Units"
             )
             TextListItem(
                 onClick = {

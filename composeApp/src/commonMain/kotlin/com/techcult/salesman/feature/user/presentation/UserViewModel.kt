@@ -5,16 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.techcult.salesman.core.data.database.UserEntity
 import com.techcult.salesman.core.domain.onError
 import com.techcult.salesman.core.domain.onSuccess
-import com.techcult.salesman.feature.RolePermission.domain.RolePermissionRepository
-import com.techcult.salesman.feature.RolePermission.presentation.PermissionChecked
-import com.techcult.salesman.feature.RolePermission.presentation.RolePermissionUiState
-import com.techcult.salesman.feature.user.domain.GetUserListUseCase
+import com.techcult.salesman.feature.Settings.RolePermission.domain.RolePermissionRepository
 import com.techcult.salesman.feature.user.domain.UserRepository
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 

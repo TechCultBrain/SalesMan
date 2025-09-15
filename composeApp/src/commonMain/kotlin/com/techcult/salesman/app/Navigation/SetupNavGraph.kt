@@ -10,6 +10,7 @@ import com.techcult.salesman.app.Navigation.Screen.ResetPasswordRoute
 import com.techcult.salesman.app.Navigation.Screen.SplashRoute
 import com.techcult.salesman.app.Navigation.Screen.VerifyOtpRoute
 import com.techcult.salesman.feature.Home.presentation.HomeScreen
+import com.techcult.salesman.feature.auth.presentation.UserLogin.UserLoginScreen
 import com.techcult.salesman.feature.auth.presentation.forgotpassword.ForgotPasswordScreen
 import com.techcult.salesman.feature.auth.presentation.login.LoginScreen
 import com.techcult.salesman.feature.auth.presentation.register.RegisterScreen
@@ -22,7 +23,7 @@ fun SetupNavigation(startDestination: Screen) {
     val navController: NavHostController = rememberNavController()
 
 
-    NavHost(navController = navController, startDestination = startDestination)
+    NavHost(navController = navController, startDestination = Screen.HomeRoute)
     {
         composable<SplashRoute> {
 
@@ -32,8 +33,8 @@ fun SetupNavigation(startDestination: Screen) {
         composable<Screen.LoginRoute> {
             LoginScreen(navigateToHome = {
                 navController.navigate(Screen.HomeRoute) {
-                    popUpTo(Screen.LoginRoute){
-                        inclusive=true
+                    popUpTo(Screen.LoginRoute) {
+                        inclusive = true
                     }
                 }
             }, navigateToSignUp = {
@@ -53,6 +54,13 @@ fun SetupNavigation(startDestination: Screen) {
                     }
                 }
             )
+        }
+        composable<Screen.UserLoginRoute> {
+            UserLoginScreen(onLoginSuccess = {
+                navController.navigate(Screen.HomeRoute) {
+                    popUpTo(Screen.UserLoginRoute)
+                }
+            })
         }
         composable<Screen.HomeRoute> {
             HomeScreen()
