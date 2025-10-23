@@ -116,7 +116,7 @@ fun HomeScreenContent(
                     onAction = onAction,
                     modifier = Modifier.padding(top = padding.calculateTopPadding())
                 )
-                HomeGraph(navController, modifier = Modifier.padding(start = 96.dp))
+                HomeGraph(navController, modifier = Modifier.padding(top=padding.calculateTopPadding(),start = 96.dp))
 
             }
             DeviceConfiguration.TABLET_PORTRAIT->
@@ -152,7 +152,7 @@ fun HomeScreenContent(
                 )
                 HomeGraph(
                     navController,
-                    modifier = Modifier.padding(top = padding.calculateTopPadding(), start = 96.dp)
+                    modifier = Modifier.padding(top = 100.dp, start = 96.dp)
                 )
 
             }
