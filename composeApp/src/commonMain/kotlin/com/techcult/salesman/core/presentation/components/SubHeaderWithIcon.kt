@@ -15,7 +15,7 @@ fun SubHeaderWithIcon(headerText: String, icon: @Composable () -> Unit)
     Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
         icon()
         Spacer(modifier = Modifier.width(LocalPadding.current.tiny))
-        Text(text = headerText, style = MaterialTheme.typography.titleSmall,color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(text = headerText, style = MaterialTheme.typography.titleMedium,color = MaterialTheme.colorScheme.onSurfaceVariant)
 
     }
 }

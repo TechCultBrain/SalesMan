@@ -69,7 +69,7 @@ fun MyTextField(
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
         Spacer(modifier = Modifier.height(4.dp))
@@ -93,17 +93,17 @@ fun MyTextField(
                     shape = MaterialTheme.shapes.medium,
                     border = BorderStroke(
                         width = if (focused.value) {
-                            2.dp
+                            1.dp
                         } else {
                             0.dp
                         },
                         color = if (focused.value) {
-                            Color(0xFFa1a1a1)
+                            MaterialTheme.colorScheme.primaryContainer
                         } else {
                             Color.Transparent
                         }
                     ),
-                    color = Color(0xFFF3F3F5)
+                    color = MaterialTheme.colorScheme.surfaceContainerHighest
                 ) {
                     Box(
                         contentAlignment = Alignment.CenterStart,
@@ -140,7 +140,7 @@ fun MyTextField(
                                         Text(
                                             text = placeholder,
                                             style = MaterialTheme.typography.bodySmall,
-                                            color = Color(0xFF717182)
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
 
 

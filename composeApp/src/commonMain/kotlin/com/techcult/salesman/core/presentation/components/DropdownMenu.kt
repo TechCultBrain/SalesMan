@@ -7,6 +7,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowDropDown
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,16 +33,22 @@ fun DropDownMenu(
     ExposedDropdownMenuBox(modifier = modifier, expanded = isExpanded, onExpandedChange = {
         onExpandedChange(it)
     }) {
-        MyTextField(
-            readOnly = readOnly,
+        MyOutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
+            readOnly = readOnly,
             value = value,
-            onValueChange = {
-            },
+            onValueChange = {},
             label = label,
-            trailingIcon = Icons.Outlined.ArrowDropDown, onTrailingIconClick = {
+            trailingIcon =
+
+                    Icons.Outlined.ArrowDropDown
+            ,
+            placeholder = placeholder,
+            onTrailingIconClick = {
                 onExpandedChange(true)
-            },placeholder = placeholder)
+            }
+
+           )
         ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = {
             onExpandedChange(false)
         }) {

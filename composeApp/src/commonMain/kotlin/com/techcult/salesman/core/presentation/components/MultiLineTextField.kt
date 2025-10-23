@@ -42,7 +42,7 @@ fun MultilineTextField(
                 Box(
                     modifier = modifier.fillMaxWidth().height(100.dp)
                         .clip(shape = MaterialTheme.shapes.medium).background(
-                            Color(0xFFF3F3F5)
+                            color = MaterialTheme.colorScheme.surfaceContainerHighest
                     ).padding(16.dp)
                 ) {
                     innerTextField()
@@ -51,7 +51,7 @@ fun MultilineTextField(
                         Text(
                             text = placeholder,
                             style = MaterialTheme.typography.bodySmall,
-                            color =Color(0xFF717182)
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
 
 

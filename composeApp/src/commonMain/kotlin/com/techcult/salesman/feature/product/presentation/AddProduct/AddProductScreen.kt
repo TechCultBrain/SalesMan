@@ -34,11 +34,14 @@ import androidx.compose.material.icons.outlined.Store
 import androidx.compose.material.icons.outlined.Style
 import androidx.compose.material.icons.outlined.UploadFile
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -53,6 +56,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.techcult.salesman.core.presentation.components.ButtonWithIcon
 import com.techcult.salesman.core.presentation.components.DropDownMenu
 import com.techcult.salesman.core.presentation.components.MultilineTextField
+import com.techcult.salesman.core.presentation.components.MyOutlinedTextField
 import com.techcult.salesman.core.presentation.components.MyTextField
 import com.techcult.salesman.core.presentation.components.ObserveAsEvents
 import com.techcult.salesman.core.presentation.components.RadioGroupOption
@@ -161,47 +165,48 @@ private fun BasicInformationSection(
             )
             Spacer(modifier = Modifier.height(LocalPadding.current.normal))
 
+
             // Product Name & SKU
             Row(horizontalArrangement = Arrangement.spacedBy(LocalPadding.current.normal)) {
-                MyTextField(
+                MyOutlinedTextField(
                     modifier = Modifier.weight(1f),
                     value = state.productName,
                     onValueChange = {
                         onAction(ProductEditActions.OnProductNameChange(it))
 
                     },
-                    label = "Product Name *",
-                    placeholder = "Enter product name"
+                    label = "Product Name",
+                    placeholder = "Enter product name",
                 )
-                MyTextField(
+                MyOutlinedTextField(
                     modifier = Modifier.weight(1f),
                     value = state.productCode,
                     onValueChange = {
                         onAction(ProductEditActions.OnProductCodeChange(it))
 
                     },
-                    label = "SKU / Product Code *",
-                    placeholder = "e.g., PROD-001"
+                    label = "Product Code",
+                    placeholder = "Enter product code",
                 )
             }
             Spacer(modifier = Modifier.height(LocalPadding.current.normal))
 
             // Barcode & Category
             Row(horizontalArrangement = Arrangement.spacedBy(LocalPadding.current.normal)) {
-                MyTextField(
-                    modifier = Modifier.weight(1f),
-                    value = state.productBarcode,
-                    onValueChange = {
-                        onAction(ProductEditActions.OnProductBarcodeChange(it))
+               MyOutlinedTextField(
+                   modifier = Modifier.weight(1f),
+                   value = state.productBarcode,
+                   onValueChange = {
+                       onAction(ProductEditActions.OnProductBarcodeChange(it))
 
-                    },
-                    label = "Barcode / QR Code",
-                    placeholder = "Scan or enter barcode",
-                    trailingIcon = Icons.Outlined.QrCodeScanner,
-                    onTrailingIconClick = {
-                        onAction(ProductEditActions.OnBarCodeScanClicked)
-                    }
-                )
+                   },
+                   label = "Barcode",
+                   placeholder = "Enter barcode",
+                   trailingIcon =
+                       Icons.Outlined.QrCodeScanner
+
+
+               )
                 DropDownMenu(
                     isExpanded = state.isCategoryExpanded,
                     modifier = Modifier.weight(1f),
@@ -216,39 +221,35 @@ private fun BasicInformationSection(
             Spacer(modifier = Modifier.height(LocalPadding.current.normal))
 
             // Description
-            MultilineTextField(
+            MyOutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
                 value = state.productDescription,
                 onValueChange = {
                     onAction(ProductEditActions.OnProductDescriptionChange(it))
 
                 },
+                maxLines = 3,
                 label = "Description",
-                placeholder = "Enter product description, features, specifications...",
-                modifier = Modifier.fillMaxWidth().height(120.dp)
+                placeholder ="Enter product description",
+
             )
             Spacer(modifier = Modifier.height(LocalPadding.current.normal))
 
             // Tags
-            MyTextField(
-                value = state.tags,
-                onValueChange = {
-                    onAction(ProductEditActions.OnTagsChange(it))
+           MyOutlinedTextField(
+               modifier = Modifier.fillMaxWidth(),
+               value = state.tags,
+               onValueChange = {
+                   onAction(ProductEditActions.OnTagsChange(it))
+               },
+               maxLines = 1,
+               label = "Tags",
+               placeholder = "Enter product tags",
+               singleLine = true,
+               supportingText = "Separate tags with commas"
 
-                },
-                label = "Tags",
-                placeholder = "e.g., organic, premium, bestseller (comma-separated)",
-                modifier = Modifier.fillMaxWidth()
-            )
-            // Helper text for tags
-            Text(
-                text = "Use tags to help categorize and search for products",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.padding(
-                    start = LocalPadding.current.small,
-                    top = LocalPadding.current.tiny
-                )
-            )
+           )
+
         }
     }
 }
@@ -299,14 +300,17 @@ private fun RetailInformationSection(
             }
             Spacer(modifier = Modifier.height(LocalPadding.current.normal))
 
-            MyTextField(
+            MyOutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = state.warrantyPeriod,
                 onValueChange = {
                     onAction(ProductEditActions.OnWarrantyPeriodChange(it))
+
+
                 },
                 label = "Warranty Period",
-                placeholder = "e.g., 1 year, 6 months"
+                placeholder = "Enter warranty period",
+
             )
         }
     }
