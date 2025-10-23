@@ -79,7 +79,7 @@ fun UserManagementScreenContent(state: UserUiState, onAction: (UserActions) -> U
 
                     })
                 Spacer(modifier = Modifier.height(16.dp))
-                MySearchBar(modifier = Modifier, labelText = "Search", onValueChange = {
+                MySearchBar(modifier = Modifier, placeholder = "Search", onValueChange = {
                     onAction(UserActions.OnQueryChange(it))
                 },value = state.query.toString(),)
                 UserListScreen(state = state, action = onAction,deviceConfiguration)

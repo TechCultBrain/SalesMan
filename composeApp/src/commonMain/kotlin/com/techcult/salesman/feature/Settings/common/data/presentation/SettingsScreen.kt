@@ -19,6 +19,7 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Print
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Store
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -44,7 +45,6 @@ fun SettingsScreen(navigateTo: (Any) -> Unit) {
             is SettingsAction.OnSettingOptionClicked -> {
                 navigateTo(action.option.route)
             }
-
         }
     })
 
@@ -55,7 +55,6 @@ fun SettingsScreen(navigateTo: (Any) -> Unit) {
 fun SettingsScreenContent(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
     val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
     val deviceConfiguration = DeviceConfiguration.fromWindowSizeClass(windowSizeClass)
-    val scrollState = rememberScrollState(initial = 2)
     Scaffold {
         when (deviceConfiguration) {
             DeviceConfiguration.TABLET_LANDSCAPE -> {
@@ -64,6 +63,9 @@ fun SettingsScreenContent(modifier: Modifier, onAction: (SettingsAction) -> Unit
 
             DeviceConfiguration.DESKTOP -> {
                 SettingsWideScreen(onAction)
+            }
+            DeviceConfiguration.MOBILE_PORTRAIT -> {
+                SettingsCompactScreen(onAction)
             }
 
             else -> {
@@ -78,24 +80,23 @@ fun SettingsScreenContent(modifier: Modifier, onAction: (SettingsAction) -> Unit
 
 @Composable
 fun SettingsWideScreen(onAction: (SettingsAction) -> Unit) {
-    Surface(modifier = Modifier.fillMaxSize().padding(all = 16.dp)) {
+    Surface(modifier = Modifier.fillMaxSize().padding(all = LocalPadding.current.normal)) {
         Column(
             Modifier.fillMaxSize()
-
         )
         {
             HeaderTextWithIcon(
                 icon = Icons.Outlined.Settings,
                 title = "Settings",
-                subtitle = "Configure your pos and Manage Store Settings",
+                subtitle = "Configure your Pos Settings",
                 modifier = Modifier,
                 deviceConfiguration = DeviceConfiguration.DESKTOP
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
+            Spacer(modifier = Modifier.height(LocalPadding.current.normal))
 
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(LocalPadding.current.tiny)
             ) {
                 Column(
@@ -111,7 +112,6 @@ fun SettingsWideScreen(onAction: (SettingsAction) -> Unit) {
 
 
                 }
-                Spacer(modifier = Modifier.height(LocalPadding.current.large))
                 Column(
                     modifier = Modifier.fillMaxWidth().weight(1f),
                     verticalArrangement = Arrangement.spacedBy(LocalPadding.current.tiny)
@@ -131,7 +131,7 @@ fun SettingsWideScreen(onAction: (SettingsAction) -> Unit) {
 fun SettingsCompactScreen(onAction: (SettingsAction) -> Unit) {
     Surface(modifier = Modifier.fillMaxSize().padding(all = 16.dp)) {
         Column(
-            Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+            Modifier.fillMaxSize()
 
         )
         {
@@ -140,11 +140,12 @@ fun SettingsCompactScreen(onAction: (SettingsAction) -> Unit) {
                 title = "Settings",
                 subtitle = "Configure your pos and Manage Store Settings",
                 modifier = Modifier,
-                deviceConfiguration = DeviceConfiguration.MOBILE_PORTRAIT
+                deviceConfiguration = DeviceConfiguration.MOBILE_PORTRAIT,
+                isAddButton = false
             )
-            Spacer(modifier = Modifier.height(LocalPadding.current.large))
+            Spacer(modifier = Modifier.height(LocalPadding.current.tiny))
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().padding(bottom = LocalPadding.current.extraLarge).verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(LocalPadding.current.tiny)
             ) {
                 GeneralSettings(modifier = Modifier, onAction = onAction)
@@ -166,7 +167,7 @@ fun StaffSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
         shape = MaterialTheme.shapes.medium,
         border = BorderStroke(
             1.dp,
-            color = MaterialTheme.colorScheme.surfaceContainer.copy(0.7f)
+            color = MaterialTheme.colorScheme.outlineVariant
         )
     ) {
 
@@ -215,7 +216,7 @@ fun ReceiptSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
         shape = MaterialTheme.shapes.medium,
         border = BorderStroke(
             1.dp,
-            color = MaterialTheme.colorScheme.surfaceContainer.copy(0.7f)
+            color = MaterialTheme.colorScheme.outlineVariant
         )
     ) {
         Column(modifier = Modifier.padding(LocalPadding.current.large)) {
@@ -235,6 +236,14 @@ fun ReceiptSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
                 },
                 titleText = "Tax Settings",
                 subtitleText = "Configure tax rates and calculations"
+            )
+            TextListItem(
+                onClick = {
+                    onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.DiscountSettings))
+
+                },
+                titleText = "Disc Settings",
+                subtitleText = "Configure discount rates and calculations"
             )
             TextListItem(
                 onClick = {},
@@ -266,7 +275,7 @@ fun GeneralSettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
         shape = MaterialTheme.shapes.medium,
         border = BorderStroke(
             1.dp,
-            color = MaterialTheme.colorScheme.surfaceContainer.copy(0.7f)
+            color = MaterialTheme.colorScheme.outlineVariant
         )
     ) {
         Column(modifier = Modifier.padding(LocalPadding.current.large)) {
@@ -320,7 +329,7 @@ fun InventorySettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
         shape = MaterialTheme.shapes.medium,
         border = BorderStroke(
             1.dp,
-            color = MaterialTheme.colorScheme.surfaceContainer.copy(0.7f)
+            color = MaterialTheme.colorScheme.outlineVariant
         )
     ) {
         Column(modifier = Modifier.padding(LocalPadding.current.large)) {
@@ -352,6 +361,13 @@ fun InventorySettings(modifier: Modifier, onAction: (SettingsAction) -> Unit) {
                 },
                 titleText = "Categories",
                 subtitleText = "Organize products into categories and subcategories"
+            )
+            TextListItem(
+                onClick = {
+                    onAction(SettingsAction.OnSettingOptionClicked(SettingsRouting.BrandManagement))
+                },
+                titleText = "Brand",
+                subtitleText = "Manage Product Brands"
             )
             TextListItem(
                 onClick = {

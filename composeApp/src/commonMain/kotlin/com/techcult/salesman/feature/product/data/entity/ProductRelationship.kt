@@ -2,7 +2,6 @@ package com.techcult.salesman.feature.product.data.entity
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import com.techcult.salesman.feature.uom.data.UomEntity
 
 
 data class ProductWithCategoryAndUom(

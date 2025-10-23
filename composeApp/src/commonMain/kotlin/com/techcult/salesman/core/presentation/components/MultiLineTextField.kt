@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -41,7 +42,7 @@ fun MultilineTextField(
                 Box(
                     modifier = modifier.fillMaxWidth().height(100.dp)
                         .clip(shape = MaterialTheme.shapes.medium).background(
-                        MaterialTheme.colorScheme.surfaceContainer
+                            Color(0xFFF3F3F5)
                     ).padding(16.dp)
                 ) {
                     innerTextField()
@@ -49,10 +50,8 @@ fun MultilineTextField(
 
                         Text(
                             text = placeholder,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                                0.5f
-                            )
+                            style = MaterialTheme.typography.bodySmall,
+                            color =Color(0xFF717182)
                         )
 
 

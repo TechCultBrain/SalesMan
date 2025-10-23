@@ -20,6 +20,17 @@ enum class SettingsRouting(val route: Any) {
 
    RoleManagement(Screen.RoleManagement),
    UomManagement(Screen.UomScreen),
+   BrandManagement(Screen.BrandRoute),
+
+   DiscountSettings(Screen.DiscountRoute)
+
+
+
+
+
+
+
+
 
 
 }

@@ -105,5 +105,21 @@ sealed interface Screen {
     @Serializable
     data object UomScreen : Screen
 
+    @Serializable
+    data object BrandRoute : Screen
+
+    @Serializable
+    data class AddProductRoute(val productId: Long?) : Screen
+
+    @Serializable
+    data object DiscountRoute : Screen
+
+
+
+
+
+
+
+
 
 }

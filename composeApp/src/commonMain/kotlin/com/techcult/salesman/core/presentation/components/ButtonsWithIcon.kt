@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ButtonWithIcon(icon: ImageVector, text: String, onClick: () -> Unit,isOutlined:Boolean=false,modifier: Modifier= Modifier) {
-    Button(onClick = onClick, modifier = modifier, shape = MaterialTheme.shapes.small,colors = ButtonDefaults.buttonColors(
+    Button(onClick = onClick, modifier = modifier, shape = MaterialTheme.shapes.medium,colors = ButtonDefaults.buttonColors(
         containerColor = if(isOutlined) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primary,
         contentColor = if(isOutlined) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onPrimary
     ), border =if(isOutlined) ButtonDefaults.outlinedButtonBorder() else null) {

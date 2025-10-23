@@ -20,6 +20,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -31,6 +32,7 @@ import com.techcult.salesman.core.data.AdminNavItem
 import com.techcult.salesman.core.utils.DeviceConfiguration
 import com.techcult.salesman.feature.Home.navigation.HomeGraph
 import io.ktor.client.request.invoke
+import kotlinx.datetime.LocalDateTime
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.time.Clock
@@ -73,30 +75,29 @@ fun HomeScreenContent(
     val deviceConfiguration = DeviceConfiguration.fromWindowSizeClass(windowSizeClass)
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Row {
-                        Text(
-                            "Welcome",
-                            style = MaterialTheme.typography.titleLarge,
-                            modifier = Modifier.weight(1f)
+            if (deviceConfiguration == DeviceConfiguration.TABLET_LANDSCAPE || deviceConfiguration == DeviceConfiguration.DESKTOP) {
+                TopAppBar(
+                    colors = TopAppBarDefaults.topAppBarColors(
 
-                        )
-                        Text(
-                            "${Clock.System.now().nanosecondsOfSecond}",
-                            modifier = Modifier.weight(1f),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors()
-                    .copy(containerColor = Color(0xFF56f788))
-            )
-        }, floatingActionButton = {
-            FloatingActionButton(onClick = { logout() }) {
-                Icon(imageVector = Icons.Outlined.Error, contentDescription = null)
+                    ),
+                    title = {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                "Welcome",
+                                style = MaterialTheme.typography.titleLarge,
+                                modifier = Modifier.weight(1f),
+
+
+
+
+                            )
+
+                        }
+                    },
+
+                    )
             }
+        }, floatingActionButton = {
 
 
         },
@@ -118,6 +119,30 @@ fun HomeScreenContent(
                 HomeGraph(navController, modifier = Modifier.padding(start = 96.dp))
 
             }
+            DeviceConfiguration.TABLET_PORTRAIT->
+            {
+                HomeGraph(
+                    navController,
+                    modifier = Modifier.padding(top = padding.calculateTopPadding())
+                )
+            }
+
+            DeviceConfiguration.MOBILE_PORTRAIT -> {
+                HomeGraph(
+                    navController,
+                    modifier = Modifier.padding(top = padding.calculateTopPadding())
+                )
+
+            }
+
+            DeviceConfiguration.MOBILE_LANDSCAPE -> {
+              HomeGraph(
+                    navController,
+                    modifier = Modifier.padding(top = padding.calculateTopPadding())
+              )
+
+
+            }
 
             DeviceConfiguration.DESKTOP -> {
                 WideHomeScreenContent(
@@ -132,14 +157,6 @@ fun HomeScreenContent(
 
             }
 
-            else -> {
-
-                HomeGraph(
-                    navController,
-                    modifier = Modifier.padding(top = padding.calculateTopPadding())
-                )
-
-            }
         }
 
 

@@ -10,7 +10,7 @@ import com.techcult.salesman.core.presentation.theme.extraColor
 
 @Composable
 fun DashBoardScreen() {
-    Surface(modifier = Modifier.fillMaxSize(),color = MaterialTheme.colorScheme.primary){
+    Surface(modifier = Modifier.fillMaxSize()){
         Text("DashBoard")
     }
 

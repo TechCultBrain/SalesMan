@@ -1,5 +1,6 @@
 package com.techcult.salesman.core.presentation.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.ChevronLeft
 import androidx.compose.material.icons.outlined.Save
@@ -36,7 +38,8 @@ fun HeaderTextWithIcon(
     buttonText: String = "Add",
     onButtonClicked: () -> Unit = {},
     onBackClicked: () -> Unit = {},
-    isAddButton: Boolean = false
+    isAddButton: Boolean = false,
+    isBackButton: Boolean = false
 ) {
     if (deviceConfiguration == DeviceConfiguration.MOBILE_PORTRAIT) {
         Row(
@@ -46,15 +49,27 @@ fun HeaderTextWithIcon(
         ) {
             Row(modifier = Modifier.weight(1f),verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
 
-                icon?.let { Icon(imageVector = it, contentDescription = null) }
+               IconButton(onClick = {onBackClicked()})
+               {
+                       if (isBackButton) {
+                           Icon(imageVector = Icons.AutoMirrored.Default.ArrowBack,contentDescription = null)
+
+                       }else {
+                           icon?.let {
+                               Icon(imageVector = it, contentDescription = null)
+
+                       }
+                   }
+               }
                 Spacer(modifier = Modifier.width(LocalPadding.current.micro))
                 Text(title, style = MaterialTheme.typography.titleMedium)
             }
-
-            Button(
-                onClick = onButtonClicked, shape = MaterialTheme.shapes.medium,
-            ){
-                   Text(buttonText)
+            if (isAddButton) {
+                Button(
+                    onClick = onButtonClicked, shape = MaterialTheme.shapes.medium,
+                ) {
+                    Text(buttonText)
+                }
             }
         }
 
@@ -62,7 +77,7 @@ fun HeaderTextWithIcon(
     } else {
         Row(
             modifier = Modifier.fillMaxWidth()
-                .height(LocalDimensions.current.viewLarge),
+                ,
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
         ) {

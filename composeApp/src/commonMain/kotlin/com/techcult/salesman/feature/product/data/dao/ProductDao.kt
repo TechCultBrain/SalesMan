@@ -43,7 +43,7 @@ interface ProductDao {
         ORDER BY productName ASC
     """
     )
-     fun searchProducts(query: String): Flow<List<ProductEntity>>
+     fun searchProducts(query: String): Flow<List<ProductWithCategoryAndUom>>
 
     // ----------------
     // Relations
@@ -57,5 +57,10 @@ interface ProductDao {
     @Transaction
     @Query("SELECT * FROM products WHERE productId = :productId LIMIT 1")
      fun getProductWithVariants(productId: Long): Flow<ProductWithVariantsAndUom>
+
+
+    @Transaction
+    @Query("SELECT * FROM products WHERE productId = :productId LIMIT 1")
+    suspend fun getProductsByIdWithCategoryAndUom(productId: Long): ProductWithCategoryAndUom?
 }
 

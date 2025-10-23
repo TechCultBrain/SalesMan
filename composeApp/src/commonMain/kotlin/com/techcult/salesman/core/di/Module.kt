@@ -9,8 +9,9 @@ import com.techcult.salesman.feature.Home.di.homeModule
 import com.techcult.salesman.feature.Settings.RolePermission.di.roleModule
 import com.techcult.salesman.feature.Settings.di.settingsModule
 import com.techcult.salesman.feature.auth.di.authModule
+import com.techcult.salesman.feature.discount.di.discountModule
 import com.techcult.salesman.feature.product.di.productModule
-import com.techcult.salesman.feature.uom.di.uomModule
+import com.techcult.salesman.feature.tax.di.taxModule
 import com.techcult.salesman.feature.user.di.userModule
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModel
@@ -29,7 +30,8 @@ val coreModule = module {
         settingsModule,
         userModule,
         productModule,
-        uomModule,
+        taxModule,
+        discountModule
     )
     single { HttpClientFactory.create(get()) }
     single {

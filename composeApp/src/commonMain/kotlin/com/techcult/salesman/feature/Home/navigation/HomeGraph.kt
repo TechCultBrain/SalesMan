@@ -13,8 +13,14 @@ import com.techcult.salesman.feature.Settings.common.data.presentation.SettingsS
 import com.techcult.salesman.feature.Settings.store.presentation.StoreInformationScreen
 import com.techcult.salesman.feature.user.presentation.UserManagementScreen
 import com.techcult.salesman.feature.customer.data.CustomerScreen
-import com.techcult.salesman.feature.uom.presentation.UomScreen
+import com.techcult.salesman.feature.discount.presentation.DiscountScreen
+import com.techcult.salesman.feature.product.presentation.brand.BrandScreen
+import com.techcult.salesman.feature.product.presentation.category.CategoryScreen
+import com.techcult.salesman.feature.product.presentation.AddProduct.AddProductScreen
+import com.techcult.salesman.feature.product.presentation.product.ProductScreen
+import com.techcult.salesman.feature.product.presentation.uom.UomScreen
 import com.techcult.salesman.feature.report.presentation.ReportScreen
+import com.techcult.salesman.feature.tax.presentation.TaxScreen
 
 
 @Composable
@@ -66,7 +72,7 @@ fun HomeGraph(navController: NavHostController, modifier: Modifier) {
         }
         composable<Screen.TaxSettings>
         {
-            //UserManagementScreen()
+            TaxScreen()
         }
         composable<Screen.ReceiptSettings>
         {
@@ -78,7 +84,9 @@ fun HomeGraph(navController: NavHostController, modifier: Modifier) {
         }
         composable<Screen.ProductManagement>
         {
-            // UserManagementScreen()
+            ProductScreen(navigateToAddProduct = {
+                navController.navigate(Screen.AddProductRoute(it))
+            })
         }
         composable<Screen.SupplierManagement>
         {
@@ -86,7 +94,7 @@ fun HomeGraph(navController: NavHostController, modifier: Modifier) {
         }
         composable<Screen.CategoryScreen>
         {
-            // UserManagementScreen()
+            CategoryScreen()
         }
         composable<Screen.StockManagement>
         {
@@ -115,6 +123,18 @@ fun HomeGraph(navController: NavHostController, modifier: Modifier) {
 
         composable<Screen.UomScreen> {
             UomScreen()
+        }
+        composable<Screen.BrandRoute> {
+            BrandScreen()
+        }
+
+        composable<Screen.AddProductRoute> {
+            AddProductScreen(navigateBack = {
+                navController.popBackStack()
+            })
+        }
+        composable<Screen.DiscountRoute> {
+            DiscountScreen()
         }
 
     }

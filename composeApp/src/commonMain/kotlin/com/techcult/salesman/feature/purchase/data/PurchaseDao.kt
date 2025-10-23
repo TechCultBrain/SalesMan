@@ -12,11 +12,11 @@ interface PurchaseDao {
 
     @Transaction
     @Query("SELECT * FROM purchases WHERE purchaseId = :id LIMIT 1")
-     fun getPurchaseWithItems(id: String): PurchaseWithItems?
+     suspend fun getPurchaseWithItems(id: String): PurchaseWithItems?
 
     @Transaction
     @Query("SELECT * FROM purchases ORDER BY purchaseDate DESC")
-     fun getAllPurchases(): List<PurchaseWithItems>
+     suspend fun getAllPurchases(): List<PurchaseWithItems>
 
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insertPurchase(purchase: PurchaseEntity)
@@ -33,6 +33,5 @@ interface PurchaseDao {
         insertItems(items)
     }
 
-    @Delete
-     fun deletePurchase(purchase: PurchaseEntity)
+
 }

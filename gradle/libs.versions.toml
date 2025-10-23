@@ -17,6 +17,7 @@ datastorePreferences = "1.1.7"
 junit = "4.13.2"
 kotlin = "2.2.0"
 kotlinx-coroutines = "1.10.2"
+kotlinxDatetime = "0.7.1"
 materialIconsExtended = "1.7.3"
 navigationCompose = "2.9.0-beta04"
 kotlinSerialization = "1.8.1"
@@ -45,6 +46,7 @@ androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle
 kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 
 jetbrains-compose-navigation = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref= "navigationCompose"}
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -28,9 +29,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.techcult.salesman.core.presentation.theme.LocalPadding
+import io.ktor.client.request.invoke
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -54,7 +57,8 @@ fun MyTextField(
         imeAction = ImeAction.Next,
         keyboardType = androidx.compose.ui.text.input.KeyboardType.Password
     ),
-    readOnly: Boolean = false
+    readOnly: Boolean = false,
+    visualTransformation: androidx.compose.ui.text.input.VisualTransformation = VisualTransformation.None
 
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -65,7 +69,7 @@ fun MyTextField(
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
         Spacer(modifier = Modifier.height(4.dp))
@@ -73,7 +77,7 @@ fun MyTextField(
             readOnly = readOnly,
             modifier = Modifier.padding(
 
-            ), // Padding for the BasicTextField content
+            ).height(42.dp), // Padding for the BasicTextField content
 
             value = value,
             onValueChange = { it ->
@@ -88,14 +92,18 @@ fun MyTextField(
                     modifier = Modifier.height(48.dp).fillMaxWidth(),
                     shape = MaterialTheme.shapes.medium,
                     border = BorderStroke(
-                        width = 1.dp,
+                        width = if (focused.value) {
+                            2.dp
+                        } else {
+                            0.dp
+                        },
                         color = if (focused.value) {
-                            MaterialTheme.colorScheme.onSurfaceVariant.copy(0.4f)
+                            Color(0xFFa1a1a1)
                         } else {
                             Color.Transparent
                         }
                     ),
-                    color = MaterialTheme.colorScheme.surfaceContainer
+                    color = Color(0xFFF3F3F5)
                 ) {
                     Box(
                         contentAlignment = Alignment.CenterStart,
@@ -111,7 +119,8 @@ fun MyTextField(
                                 androidx.compose.material3.Icon(
                                     imageVector = leadingIcon,
                                     contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(0.5f),
+                                    modifier = Modifier.size(16.dp)
                                 )
                             }
 
@@ -130,10 +139,8 @@ fun MyTextField(
 
                                         Text(
                                             text = placeholder,
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant.copy(
-                                                0.5f
-                                            )
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = Color(0xFF717182)
                                         )
 
 
@@ -148,7 +155,7 @@ fun MyTextField(
                                     androidx.compose.material3.Icon(
                                         imageVector = trailingIcon,
                                         contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        tint = MaterialTheme.colorScheme.onSurface,
                                     )
                                 }
                             }
@@ -157,6 +164,7 @@ fun MyTextField(
                     }
                 }
             },
+            visualTransformation = visualTransformation,
             interactionSource = interactionSource
 
         )
@@ -167,8 +175,7 @@ fun MyTextField(
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.error
             )
-        }
-        else if (supportingText != null) {
+        } else if (supportingText != null) {
             Text(
                 text = supportingText,
                 style = MaterialTheme.typography.labelMedium,
