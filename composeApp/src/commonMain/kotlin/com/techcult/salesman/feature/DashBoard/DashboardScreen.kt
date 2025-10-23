@@ -11,7 +11,8 @@ import com.techcult.salesman.core.presentation.theme.extraColor
 @Composable
 fun DashBoardScreen() {
     Surface(modifier = Modifier.fillMaxSize()){
-        Text("DashBoard")
+        Text("DashBoard is the new home")
+
     }
 
 }
