@@ -175,7 +175,7 @@ private fun BasicInformationSection(
                         onAction(ProductEditActions.OnProductNameChange(it))
 
                     },
-                    label = "Product Name",
+                    label = "Product Names",
                     placeholder = "Enter product name",
                 )
                 MyOutlinedTextField(
